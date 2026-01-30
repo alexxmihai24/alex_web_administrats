@@ -79,6 +79,9 @@ export const translations = {
             ai: "Asistente IA",
             thinking: "Escribiendo...",
             whatsappButton: "¿Prefieres que un experto lo haga por ti? Habla con nosotros",
+            errorConnection: "Lo siento, hay un problema de conexión. Por favor, inténtalo de nuevo en unos segundos.",
+            errorGeneral: "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
+            consultingNormative: "El gestor IA está consultando la normativa...",
         },
 
         // Tramite Page
@@ -181,6 +184,9 @@ export const translations = {
             ai: "Asistent AI",
             thinking: "Scrie...",
             whatsappButton: "Preferi ca un expert să o facă pentru tine? Vorbește cu noi",
+            errorConnection: "Ne pare rău, există o problemă de conexiune. Te rugăm să încerci din nou în câteva secunde.",
+            errorGeneral: "A apărut o eroare. Te rugăm să încerci din nou.",
+            consultingNormative: "Asistentul AI consultă normativa...",
         },
 
         // Tramite Page

@@ -20,10 +20,22 @@ model Tramite {
   updatedAt   DateTime @updatedAt
 }
 
-// Modelo para las consultas de los usuarios
+// Modelo para las consultas de los usuarios (con RAG)
 model Consulta {
-  id             Int      @id @default(autoincrement())
-  mensajeUsuario String   @db.Text
-  respuestaIA    String?  @db.Text
-  timestamp      DateTime @default(now())
+  id             Int        @id @default(autoincrement())
+  slug           String? // Trámite relacionado (para RAG)
+  mensajeUsuario String     @db.Text
+  respuestaIA    String?    @db.Text
+  timestamp      DateTime   @default(now())
+  feedbacks      Feedback[] // Relación con Feedback
+}
+
+// Modelo para feedback de usuarios (mejora continua)
+model Feedback {
+  id         Int      @id @default(autoincrement())
+  consultaId Int
+  consulta   Consulta @relation(fields: [consultaId], references: [id], onDelete: Cascade)
+  rating     Int // 1 = 👎, 5 = 👍
+  comentario String?  @db.Text
+  timestamp  DateTime @default(now())
 }

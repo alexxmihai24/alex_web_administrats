@@ -50,10 +50,29 @@ export default function ChatBox({ slug }) {
             });
 
             if (!response.ok) {
-                throw new Error('Error en la respuesta de la API');
+                const errorData = await response.json().catch(() => ({}));
+                console.error('❌ Error API:', {
+                    status: response.status,
+                    statusText: response.statusText,
+                    error: errorData
+                });
+
+                // Manejo de errores HTTP específicos
+                if (response.status === 500) {
+                    throw new Error('connection');
+                } else if (response.status === 404) {
+                    throw new Error('notfound');
+                } else {
+                    throw new Error(`general (${response.status})`);
+                }
             }
 
             const data = await response.json();
+
+            // Verificar si hay error en la respuesta
+            if (data.error) {
+                throw new Error('connection');
+            }
 
             // Agregar respuesta de la IA
             setMessages(prev => [...prev, {
@@ -63,9 +82,17 @@ export default function ChatBox({ slug }) {
             }]);
         } catch (error) {
             console.error('Error:', error);
+
+            // Mensajes de error específicos según el tipo
+            let errorMessage = t.chat.errorGeneral;
+
+            if (error.message === 'connection' || error.message === 'Failed to fetch') {
+                errorMessage = t.chat.errorConnection;
+            }
+
             setMessages(prev => [...prev, {
                 role: 'assistant',
-                content: 'Lo siento, ha ocurrido un error. Por favor, inténtalo de nuevo.',
+                content: errorMessage,
                 timestamp: new Date(),
                 isError: true
             }]);
@@ -136,7 +163,7 @@ export default function ChatBox({ slug }) {
                                             <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
                                             <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                                         </div>
-                                        <span className="text-sm text-gray-600">{t.chat.thinking}</span>
+                                        <span className="text-sm text-gray-600">{t.chat.consultingNormative}</span>
                                     </div>
                                 </div>
                             </div>

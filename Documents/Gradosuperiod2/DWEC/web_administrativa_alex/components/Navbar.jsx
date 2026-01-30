@@ -17,10 +17,10 @@ export default function Navbar() {
                             </svg>
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-2xl font-bold text-white tracking-tight group-hover:text-yellow-300 transition-colors duration-300">
+                            <span className="text-lg md:text-2xl font-bold text-white tracking-tight group-hover:text-yellow-300 transition-colors duration-300 line-clamp-1">
                                 {t.navbar.title}
                             </span>
-                            <span className="text-xs text-blue-200 font-medium">{t.navbar.subtitle}</span>
+                            <span className="hidden sm:inline-block text-xs text-blue-200 font-medium">{t.navbar.subtitle}</span>
                         </div>
                     </Link>
 
@@ -30,8 +30,8 @@ export default function Navbar() {
                             <button
                                 onClick={() => changeLanguage('es')}
                                 className={`px-3 py-1 rounded-md font-medium transition-all duration-300 ${language === 'es'
-                                        ? 'bg-yellow-400 text-blue-900 shadow-md'
-                                        : 'text-white hover:bg-white/20'
+                                    ? 'bg-yellow-400 text-blue-900 shadow-md'
+                                    : 'text-white hover:bg-white/20'
                                     }`}
                             >
                                 🇪🇸 ES
@@ -39,8 +39,8 @@ export default function Navbar() {
                             <button
                                 onClick={() => changeLanguage('ro')}
                                 className={`px-3 py-1 rounded-md font-medium transition-all duration-300 ${language === 'ro'
-                                        ? 'bg-yellow-400 text-blue-900 shadow-md'
-                                        : 'text-white hover:bg-white/20'
+                                    ? 'bg-yellow-400 text-blue-900 shadow-md'
+                                    : 'text-white hover:bg-white/20'
                                     }`}
                             >
                                 🇷🇴 RO

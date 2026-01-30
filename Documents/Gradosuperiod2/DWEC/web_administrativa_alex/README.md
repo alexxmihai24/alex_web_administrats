@@ -1,202 +1,256 @@
-# 🇪🇸 Asesor Administrativo España
+# 🚀 Asesor Administrativo España - Proyecto Completo
 
-Una aplicación web moderna construida con **Next.js 15** y **JavaScript** que ayuda a los usuarios a resolver sus trámites administrativos en España utilizando inteligencia artificial.
+## 📋 Resumen del Proyecto
 
-## ✨ Características
+Este es un **asistente administrativo inteligente** construido con Next.js 15, que ayuda a usuarios a resolver trámites administrativos en España mediante IA (Google Gemini).
 
-- 🎨 Diseño moderno con **Tailwind CSS**
-- 📱 Completamente responsive
-- 🗂️ 4 áreas de trámites: Consulados, SEPE, Seguridad Social y Hacienda
-- 💾 Base de datos PostgreSQL con **Prisma ORM**
-- ☁️ Compatible con **Neon.tech** (Database as a Service)
-- 🤖 Preparado para integración con IA
+---
 
-## 🚀 Tecnologías
+## ✅ Estado Actual - TODO IMPLEMENTADO
 
-- **Next.js 15** (App Router)
-- **JavaScript** (sin TypeScript)
-- **Tailwind CSS**
-- **Prisma ORM**
-- **PostgreSQL** (Neon.tech)
-- **React 19**
+### 🎨 **Frontend**
+- ✅ Next.js 15 (App Router) con JavaScript
+- ✅ Tailwind CSS para estilos modernos
+- ✅ Sistema multi-idioma (Español / Rumano)
+- ✅ Navbar y Footer profesionales
+- ✅ Página de inicio con 4 tarjetas de trámites
+- ✅ Rutas dinámicas `/tramite/[slug]`
+- ✅ Diseño responsivo y moderno
 
-## 📁 Estructura del Proyecto
+### 🤖 **Inteligencia Artificial**
+- ✅ Integración con Google Gemini AI
+- ✅ Chat interactivo por trámite
+- ✅ Sistema RAG (Retrieval-Augmented Generation)
+- ✅ Feedback de usuarios
+- ✅ Almacenamiento de consultas en BD
+
+### 💾 **Base de Datos**
+- ✅ PostgreSQL en Neon.tech
+- ✅ Prisma ORM configurado
+- ✅ Modelos: Tramite, Consulta
+- ✅ Seed ejecutado (4 trámites iniciales)
+
+### 📱 **Características Especiales**
+- ✅ **Botón de WhatsApp** con mensaje personalizado por trámite
+- ✅ Animaciones y efectos visuales atractivos
+- ✅ Sistema de contexto para multi-idioma
+- ✅ Configuración centralizada de contacto
+
+---
+
+## 📂 Estructura del Proyecto
 
 ```
 web_administrativa_alex/
 ├── app/
-│   ├── layout.js              # Layout principal con Navbar y Footer
-│   ├── page.js                # Página de inicio con tarjetas de trámites
+│   ├── layout.js               # Layout principal con Navbar y Footer
+│   ├── page.js                 # Página de inicio (4 tarjetas)
+│   ├── globals.css             # Estilos globales
 │   └── tramite/
 │       └── [slug]/
-│           └── page.js        # Página dinámica de cada trámite
+│           └── page.js         # Página de detalle de trámite + Chat IA
 ├── components/
-│   ├── Navbar.jsx             # Barra de navegación
-│   ├── Footer.jsx             # Pie de página
-│   └── TramiteCard.jsx        # Tarjeta de trámite
+│   ├── Navbar.jsx              # Barra de navegación
+│   ├── Footer.jsx              # Pie de página
+│   ├── TramiteCard.jsx         # Tarjeta de trámite
+│   ├── ChatBox.jsx             # Chat con IA
+│   └── ClientLayout.jsx        # Layout del lado del cliente
 ├── lib/
-│   └── prisma.js              # Cliente de Prisma (singleton)
+│   ├── LanguageContext.js      # Contexto de idiomas
+│   ├── translations.js         # Traducciones ES/RO
+│   └── contact-config.js       # Configuración de contacto (WhatsApp, email)
 ├── prisma/
-│   ├── schema.prisma          # Schema de la base de datos
-│   └── seed.js                # Script para insertar datos iniciales
-├── .env                       # Variables de entorno (configurar aquí Neon.tech)
-├── package.json
-└── README.md
+│   ├── schema.prisma           # Esquema de base de datos
+│   └── seed.js                 # Datos iniciales
+├── .env                        # Variables de entorno
+└── package.json
 ```
-
-## 📋 Prerequisitos
-
-- **Node.js** 18.x o superior
-- **npm** o **yarn**
-- Una cuenta en **[Neon.tech](https://neon.tech)** (gratis)
-
-## ⚙️ Configuración
-
-### 1️⃣ Clonar o descargar el proyecto
-
-Si ya tienes el proyecto, navega a la carpeta:
-
-```bash
-cd web_administrativa_alex
-```
-
-### 2️⃣ Instalar dependencias
-
-```bash
-npm install
-```
-
-### 3️⃣ Configurar la base de datos (Neon.tech)
-
-1. Ve a [https://neon.tech](https://neon.tech) y crea una cuenta (si no tienes una)
-2. Crea un nuevo proyecto en Neon
-3. Copia la **Connection String** (cadena de conexión) de PostgreSQL
-4. Abre el archivo `.env` en la raíz del proyecto
-5. Reemplaza la línea `DATABASE_URL` con tu cadena de conexión:
-
-```env
-DATABASE_URL="postgresql://USER:PASSWORD@HOST/DATABASE?sslmode=require"
-```
-
-**Ejemplo:**
-```env
-DATABASE_URL="postgresql://neondb_owner:ABC123xyz@ep-cool-name-123456.us-east-2.aws.neon.tech/neondb?sslmode=require"
-```
-
-### 4️⃣ Crear las tablas en la base de datos
-
-Ejecuta este comando para sincronizar el schema de Prisma con tu base de datos:
-
-```bash
-npx prisma db push
-```
-
-### 5️⃣ Generar el cliente de Prisma
-
-```bash
-npx prisma generate
-```
-
-### 6️⃣ Insertar datos iniciales (seed)
-
-Para poblar la base de datos con los 4 trámites iniciales:
-
-```bash
-node prisma/seed.js
-```
-
-Deberías ver algo como:
-```
-🌱 Iniciando seed de la base de datos...
-📝 Insertando trámites...
-✅ Trámite creado/actualizado: Consulados (consulados)
-✅ Trámite creado/actualizado: SEPE (sepe)
-✅ Trámite creado/actualizado: Seguridad Social (seguridad-social)
-✅ Trámite creado/actualizado: Hacienda (hacienda)
-✨ Seed completado exitosamente!
-```
-
-## 🏃 Ejecutar el proyecto
-
-### Modo desarrollo
-
-```bash
-npm run dev
-```
-
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
-
-### Modo producción
-
-```bash
-npm run build
-npm start
-```
-
-## 🗄️ Schema de la Base de Datos
-
-### Modelo: **Tramite**
-
-```prisma
-model Tramite {
-  id          Int      @id @default(autoincrement())
-  nombre      String
-  slug        String   @unique
-  descripcion String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-```
-
-### Modelo: **Consulta**
-
-```prisma
-model Consulta {
-  id              Int      @id @default(autoincrement())
-  mensajeUsuario  String   @db.Text
-  respuestaIA     String?  @db.Text
-  timestamp       DateTime @default(now())
-}
-```
-
-## 📝 Comandos Útiles
-
-| Comando | Descripción |
-|---------|-------------|
-| `npm run dev` | Inicia el servidor de desarrollo |
-| `npm run build` | Crea la build de producción |
-| `npm start` | Inicia el servidor de producción |
-| `npx prisma db push` | Sincroniza el schema con la base de datos |
-| `npx prisma generate` | Genera el cliente de Prisma |
-| `npx prisma studio` | Abre la interfaz visual de la base de datos |
-| `node prisma/seed.js` | Ejecuta el script de seed |
-
-## 🎨 Características de Diseño
-
-- ✅ **Gradientes vibrantes** en hero sections y componentes
-- ✅ **Glassmorphism** en elementos destacados
-- ✅ **Animaciones suaves** en hover y transiciones
-- ✅ **Iconos SVG** personalizados
-- ✅ **Layout responsive** para mobile, tablet y desktop
-- ✅ **Colores temáticos** profesionales (azul, índigo, púrpura)
-
-## 🔧 Próximos Pasos (Sugerencias)
-
-1. **Integrar IA**: Conectar el formulario de consultas con una API de IA (OpenAI, Claude, etc.)
-2. **Autenticación**: Añadir login de usuarios con NextAuth.js
-3. **Panel de Admin**: Crear área administrativa para gestionar trámites
-4. **Búsqueda**: Implementar buscador de trámites
-5. **Multiidioma**: Soporte para español, inglés, etc.
-6. **Analytics**: Integrar Google Analytics o similar
-
-## 📄 Licencia
-
-Este proyecto es de código abierto y está disponible bajo la licencia MIT.
-
-## 👨‍💻 Autor
-
-Desarrollado con ❤️ para ayudar a resolver trámites administrativos en España.
 
 ---
 
-**¿Preguntas o problemas?** Crea un issue en el repositorio.
+## 🎯 Trámites Disponibles
+
+1. **📋 Consulados** - Pasaportes, visas, documentos consulares
+2. **💼 SEPE** - Prestaciones por desempleo, formación
+3. **🏥 Seguridad Social** - Vida laboral, jubilación, pensiones
+4. **💰 Hacienda** - Declaración de la renta, certificados, IVA
+
+---
+
+## ⚙️ Configuración Necesaria
+
+### 1. **Número de WhatsApp** (IMPORTANTE)
+Abre `lib/contact-config.js` y cambia:
+```javascript
+whatsappNumber: '34612345678',  // ← Cambia por tu número real
+```
+
+### 2. **Variables de Entorno** 
+El archivo `.env` ya está configurado con:
+- `DATABASE_URL` - Conexión a Neon.tech ✅
+- `GEMINI_API_KEY` - API Key de Google Gemini ✅
+
+---
+
+## 🚀 Comandos para Ejecutar
+
+### Desarrollo Local
+```bash
+npm run dev
+# Servidor en: http://localhost:3000
+```
+
+### Base de Datos
+```bash
+# Generar cliente de Prisma
+npx prisma generate
+
+# Sincronizar esquema con BD
+npx prisma db push
+
+# Insertar datos iniciales
+node prisma/seed.js
+
+# Ver base de datos en navegador
+npx prisma studio
+```
+
+---
+
+## 🌐 Deployment a Vercel
+
+### Preparación
+1. **Subir a GitHub**
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/TU_USUARIO/web_administrativa_alex.git
+git push -u origin main
+```
+
+2. **Variables de Entorno en Vercel**
+En tu proyecto de Vercel, agrega:
+- `DATABASE_URL` - Tu conexión de Neon.tech
+- `GEMINI_API_KEY` - Tu API Key de Google Gemini
+
+3. **Deploy**
+- Conecta el repositorio en Vercel
+- Deploy automático ✅
+
+---
+
+## 🎨 Características de Diseño
+
+### Paleta de Colores
+- **Azul/Índigo**: Trámites, navegación
+- **Verde**: WhatsApp, contacto
+- **Gradientes**: Fondos modernos
+- **Glassmorphism**: Efectos de vidrio
+
+### Animaciones
+- ✨ Hover effects en tarjetas
+- 💫 Botón de WhatsApp pulsante
+- 🎯 Transiciones suaves
+- 📱 Responsive en todos los dispositivos
+
+---
+
+## 📱 Funcionalidad de WhatsApp
+
+Cuando un usuario hace clic en el botón de WhatsApp:
+1. Se abre WhatsApp Web/App
+2. Mensaje pre-rellenado: **"Hola, necesito ayuda con el trámite de [NOMBRE_TRAMITE]"**
+3. Listo para enviar
+
+---
+
+## 🤖 Sistema de IA
+
+### Google Gemini
+- Modelo: `gemini-1.5-flash`
+- Respuestas contextuales por trámite
+- Almacenamiento de conversaciones en BD
+
+### RAG System (Opcional - Futuro)
+- Documentación de vector embeddings
+- Búsqueda semántica
+- Respuestas basadas en conocimiento específico
+
+---
+
+## 📊 Base de Datos
+
+### Modelo `Tramite`
+```
+- id: Int (autoincrement)
+- nombre: String
+- slug: String (unique)
+- descripcion: String
+```
+
+### Modelo `Consulta`
+```
+- id: Int (autoincrement)
+- mensajeUsuario: String
+- respuestaIA: String
+- timestamp: DateTime
+- calificacion: Int (opcional, para feedback)
+```
+
+---
+
+## 🔐 Seguridad
+
+- ✅ Variables de entorno (.env)
+- ✅ API Keys protegidas
+- ✅ Conexión SSL a base de datos
+- ✅ Validación de entrada de usuarios
+
+---
+
+## 📈 Próximos Pasos Sugeridos
+
+1. **Mejorar RAG System** - Vectorización de documentos oficiales
+2. **Dashboard de Analytics** - Métricas de uso
+3. **Sistema de Usuarios** - Login/Register
+4. **Notificaciones** - Email, WhatsApp automático
+5. **Más Trámites** - Expandir catálogo
+
+---
+
+## 🐛 Solución de Problemas
+
+### Error de Params en Next.js 15
+**✅ RESUELTO** - Usando `React.use(params)`
+
+### Base de datos no conecta
+```bash
+npx prisma generate
+npx prisma db push
+```
+
+### Chat IA no funciona
+- Verifica `GEMINI_API_KEY` en `.env`
+- Comprueba límites de API de Google
+
+---
+
+## 👨‍💻 Créditos
+
+- **Desarrollador**: Alex
+- **Framework**: Next.js 15
+- **IA**: Google Gemini
+- **Base de Datos**: Neon.tech (PostgreSQL)
+- **Hosting**: Vercel
+
+---
+
+## 📄 Licencia
+
+Este proyecto es de uso educativo.
+
+---
+
+**¡Proyecto completamente funcional y listo para deployment! 🚀**

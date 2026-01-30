@@ -79,7 +79,7 @@ export default function Footer() {
                                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                 </svg>
-                                <span>info@asesoradministrativo.es</span>
+                                <span>amihaita831@gmail.com</span>
                             </div>
                             <div className="flex items-start space-x-3">
                                 <svg className="w-5 h-5 text-yellow-400 mt-1" fill="currentColor" viewBox="0 0 20 20">
@@ -91,7 +91,7 @@ export default function Footer() {
                                 <svg className="w-5 h-5 text-yellow-400 mt-1" fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                                 </svg>
-                                <span>Madrid, España</span>
+                                <span>Montilla, España</span>
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@ export default function Footer() {
                 <div className="border-t border-gray-700 mt-8 pt-8">
                     <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                         <p className="text-gray-400 text-sm">
-                            © {currentYear} Asesor Administrativo España. Todos los derechos reservados.
+                            © {currentYear} Asesor Administrativo Alex. Todos los derechos reservados.
                         </p>
                         <div className="flex space-x-6 text-sm">
                             <Link href="/privacy" className="text-gray-400 hover:text-yellow-400 transition-colors duration-300">
