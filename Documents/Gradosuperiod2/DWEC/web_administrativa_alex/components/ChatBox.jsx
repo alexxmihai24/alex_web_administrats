@@ -102,30 +102,30 @@ export default function ChatBox({ slug }) {
     };
 
     return (
-        <div className="flex flex-col h-full bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="flex flex-col h-full bg-slate-900 rounded-2xl shadow-2xl border border-slate-700 overflow-hidden">
             {/* Header del Chat */}
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white">
+            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 p-4 border-b border-white/10">
                 <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center border border-white/20 shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                        <svg className="w-5 h-5 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
                         </svg>
                     </div>
                     <div>
-                        <h2 className="text-xl font-bold">{t.chat.title}</h2>
-                        <p className="text-sm text-blue-100">{t.chat.ai}</p>
+                        <h2 className="text-lg font-bold text-white tracking-wide">{t.chat.title}</h2>
+                        <p className="text-xs text-blue-300 uppercase tracking-wider font-semibold">AI Assistant</p>
                     </div>
                 </div>
             </div>
 
             {/* Área de Mensajes */}
-            <div className="flex-grow overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-gray-50 to-white" style={{ maxHeight: "calc(100vh - 400px)", minHeight: "400px" }}>
+            <div className="flex-grow overflow-y-auto p-4 space-y-4 bg-slate-950/50" style={{ maxHeight: "400px", minHeight: "300px" }}>
                 {messages.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center h-full text-gray-400">
-                        <svg className="w-16 h-16 mb-4" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="flex flex-col items-center justify-center h-full text-slate-500">
+                        <svg className="w-12 h-12 mb-3 opacity-50" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
                         </svg>
-                        <p className="text-lg font-medium">{t.chat.placeholder}</p>
+                        <p className="text-sm font-medium">{t.chat.placeholder}</p>
                     </div>
                 ) : (
                     <>
@@ -135,35 +135,29 @@ export default function ChatBox({ slug }) {
                                 className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                             >
                                 <div
-                                    className={`max-w-[80%] rounded-2xl px-6 py-4 shadow-md ${message.role === 'user'
-                                        ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white'
+                                    className={`max-w-[85%] rounded-2xl px-5 py-3 shadow-lg backdrop-blur-sm ${message.role === 'user'
+                                        ? 'bg-gradient-to-tr from-blue-600 to-indigo-700 text-white rounded-tr-sm'
                                         : message.isError
-                                            ? 'bg-red-100 text-red-800 border border-red-300'
-                                            : 'bg-white text-gray-800 border border-gray-200'
+                                            ? 'bg-red-900/50 text-red-200 border border-red-500/30'
+                                            : 'bg-slate-800 text-slate-200 border border-slate-700 rounded-tl-sm'
                                         }`}
                                 >
-                                    <div className="flex items-center space-x-2 mb-2">
-                                        <span className="font-semibold text-sm">
-                                            {message.role === 'user' ? t.chat.user : t.chat.ai}
-                                        </span>
-                                    </div>
-                                    <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
-                                    <span className="text-xs opacity-70 mt-2 block">
-                                        {message.timestamp.toLocaleTimeString()}
+                                    <p className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</p>
+                                    <span className="text-[10px] opacity-50 mt-1 block text-right font-mono">
+                                        {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                     </span>
                                 </div>
                             </div>
                         ))}
                         {isLoading && (
                             <div className="flex justify-start">
-                                <div className="bg-white text-gray-800 border border-gray-200 rounded-2xl px-6 py-4 shadow-md">
+                                <div className="bg-slate-800 border border-slate-700 rounded-2xl px-5 py-3 shadow-lg">
                                     <div className="flex items-center space-x-2">
                                         <div className="flex space-x-1">
-                                            <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                                            <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                                            <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                                            <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                                            <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                                            <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                                         </div>
-                                        <span className="text-sm text-gray-600">{t.chat.consultingNormative}</span>
                                     </div>
                                 </div>
                             </div>
@@ -174,45 +168,27 @@ export default function ChatBox({ slug }) {
             </div>
 
             {/* Input de Mensaje */}
-            <form onSubmit={handleSubmit} className="p-6 bg-gray-50 border-t border-gray-200">
-                <div className="flex space-x-3">
+            <form onSubmit={handleSubmit} className="p-4 bg-slate-900 border-t border-slate-700">
+                <div className="flex space-x-2">
                     <input
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         placeholder={t.chat.placeholder}
                         disabled={isLoading}
-                        className="flex-grow px-6 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:bg-gray-100 disabled:cursor-not-allowed text-gray-800"
+                        className="flex-grow px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:opacity-50 text-white placeholder-slate-500 text-sm"
                     />
                     <button
                         type="submit"
                         disabled={isLoading || !input.trim()}
-                        className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center space-x-2"
+                        className="bg-gradient-to-tr from-blue-600 to-indigo-600 text-white w-12 h-12 rounded-xl shadow-lg hover:shadow-blue-500/25 flex items-center justify-center transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105"
                     >
-                        <span>{t.chat.send}</span>
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 transform rotate-90" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
                         </svg>
                     </button>
                 </div>
             </form>
-
-            {/* Botón de WhatsApp - Aparece después de 3 mensajes */}
-            {messages.length > 3 && (
-                <div className="px-6 pb-6 bg-gray-50">
-                    <a
-                        href={`https://wa.me/34644759913?text=Hola, necesito ayuda con el trámite: ${slug}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center space-x-3 w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-4 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                    >
-                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-                        </svg>
-                        <span>{t.chat.whatsappButton}</span>
-                    </a>
-                </div>
-            )}
         </div>
     );
 }

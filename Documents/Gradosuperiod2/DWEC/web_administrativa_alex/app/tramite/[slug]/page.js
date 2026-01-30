@@ -3,6 +3,7 @@
 import { use } from 'react';
 import Link from 'next/link';
 import ChatBox from '@/components/ChatBox';
+import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import { useLanguage } from '@/lib/LanguageContext';
 import { CONTACT_CONFIG } from '@/lib/contact-config';
 
@@ -17,32 +18,33 @@ export default function TramitePage({ params }) {
         contenido: []
     };
 
-    // Crear mensaje personalizado para WhatsApp
+    // Crear mensaje personalizado para WhatsApp (para el botón del sidebar)
     const whatsappMessage = encodeURIComponent(
         `Hola, necesito ayuda con el trámite de ${tramite.titulo}`
     );
     const whatsappUrl = `https://wa.me/${CONTACT_CONFIG.whatsappNumber}?text=${whatsappMessage}`;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12">
+        <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 py-12 text-blue-50">
+            <FloatingWhatsApp tramiteTitulo={tramite.titulo} />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Breadcrumb */}
                 <nav className="mb-8 flex items-center space-x-2 text-sm">
-                    <Link href="/" className="text-blue-600 hover:text-blue-800 transition-colors">
+                    <Link href="/" className="text-blue-400 hover:text-blue-300 transition-colors">
                         {t.tramitePage.breadcrumb.home}
                     </Link>
-                    <span className="text-gray-400">/</span>
-                    <span className="text-gray-600">{t.tramitePage.breadcrumb.tramites}</span>
-                    <span className="text-gray-400">/</span>
-                    <span className="text-gray-900 font-semibold">{tramite.titulo}</span>
+                    <span className="text-slate-600">/</span>
+                    <span className="text-slate-400">{t.tramitePage.breadcrumb.tramites}</span>
+                    <span className="text-slate-600">/</span>
+                    <span className="text-white font-semibold">{tramite.titulo}</span>
                 </nav>
 
                 {/* Header */}
-                <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-2xl shadow-2xl p-6 md:p-12 mb-8 text-white">
-                    <h1 className="text-3xl md:text-5xl font-extrabold mb-4">
+                <div className="bg-gradient-to-r from-blue-900/50 to-indigo-900/50 rounded-2xl shadow-2xl p-6 md:p-12 mb-8 text-white border border-blue-500/20 backdrop-blur-sm">
+                    <h1 className="text-3xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-white">
                         {tramite.titulo}
                     </h1>
-                    <p className="text-lg md:text-xl text-blue-100">
+                    <p className="text-lg md:text-xl text-blue-200/90">
                         {tramite.descripcion}
                     </p>
                 </div>
@@ -56,8 +58,8 @@ export default function TramitePage({ params }) {
 
                     {/* Sidebar - Info adicional */}
                     <div className="space-y-6">
-                        {/* Botón destacado de WhatsApp */}
-                        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl shadow-xl p-6 border-2 border-green-200">
+                        {/* Botón destacado de WhatsApp del Sidebar (Mantenemos como opción secundaria visible) */}
+                        <div className="bg-slate-900/80 rounded-2xl shadow-xl p-6 border border-green-500/30 backdrop-blur-sm">
                             <h3 className="text-lg font-bold text-gray-900 mb-3 text-center">
                                 ¿Necesitas Ayuda Personalizada?
                             </h3>
